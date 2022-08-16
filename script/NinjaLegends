@@ -1,79 +1,115 @@
---Hercules Exploitz On Youtube--
---Like and Subscribe!--
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Label = Instance.new("TextLabel")
-local UICorner = Instance.new("UICorner")
-local UIGradient = Instance.new("UIGradient")
-local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
-local TextButton_3 = Instance.new("TextButton")
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.Position = UDim2.new(0.39810428, 0, 0.336384416, 0)
-Frame.Size = UDim2.new(0, 297, 0, 181)
-Frame.Selectable = true
-Frame.Active = true
-Frame.Draggable = true
-Label.Name = "Label"
-Label.Parent = Frame
-Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Label.BackgroundTransparency = 1.000
-Label.Position = UDim2.new(0.0101010101, 0, 0, 0)
-Label.Size = UDim2.new(0, 252, 0, 43)
-Label.Font = Enum.Font.SourceSansBold
-Label.Text = "Ninja Legends"
-Label.TextColor3 = Color3.fromRGB(0, 0, 0)
-Label.TextScaled = true
-Label.TextSize = 14.000
-Label.TextWrapped = true
-
-UICorner.Parent = Frame
-
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 4)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-UIGradient.Parent = Frame
-
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.Position = UDim2.new(0.00696232356, 0, 0.254143655, 0)
-TextButton.Size = UDim2.new(0, 130, 0, 50)
-TextButton.Font = Enum.Font.SourceSansBold
-TextButton.Text = "WalkSpeed"
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextScaled = true
-TextButton.TextSize = 14.000
-TextButton.TextWrapped = true
-TextButton.MouseButton1Click:Connect(function()
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 125
-end)
-
-TextButton_2.Parent = Frame
-TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_2.Position = UDim2.new(0.495177835, 0, 0.254143655, 0)
-TextButton_2.Size = UDim2.new(0, 133, 0, 50)
-TextButton_2.Font = Enum.Font.SourceSansBold
-TextButton_2.Text = "Log"
-TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_2.TextScaled = true
-TextButton_2.TextSize = 14.000
-TextButton_2.TextWrapped = true
-TextButton_2.MouseButton1Click:Connect(function()
-	print("Test")
-end)
-TextButton_3.Parent = Frame
-TextButton_3.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-TextButton_3.Position = UDim2.new(0.848484874, 0, 0, 0)
-TextButton_3.Size = UDim2.new(0, 45, 0, 43)
-TextButton_3.Font = Enum.Font.SourceSans
-TextButton_3.Text = "X"
-TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_3.TextScaled = true
-TextButton_3.TextSize = 14.000
-TextButton_3.TextWrapped = true
-TextButton_3.MouseButton1Click:Connect(function()
-	TextButton_3.Parent.Visible = false
-end)
+if game.PlaceId == 155615604 then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Prison Life", "Sentinel")
+ 
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+ 
+    MainSection:NewDropdown("Give Gun", "Gives the localplayer a gun", {"M9", "Remington 870", "AK-47"}, function(v)
+        local A_1 = game:GetService("Workspace")["Prison_ITEMS"].giver[v].ITEMPICKUP
+        local Event = game:GetService("Workspace").Remote.ItemHandler
+        Event:InvokeServer(A_1)
+    end)
+ 
+    MainSection:NewDropdown("Gun Mod", "Makes the gun op", {"M9", "Remington 870", "AK-47"}, function(v)
+        local module = nil
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(v) then
+            module = require(game:GetService("Players").LocalPlayer.Backpack[v].GunStates)
+        elseif game:GetService("Players").LocalPlayer.Character:FindFirstChild(v) then
+            module = require(game:GetService("Players").LocalPlayer.Character[v].GunStates)
+        end
+        if module ~= nil then
+            module["MaxAmmo"] = math.huge
+            module["CurrentAmmo"] = math.huge
+            module["StoredAmmo"] = math.huge
+            module["FireRate"] = 0.000001
+            module["Spread"] = 0
+            module["Range"] = math.huge
+            module["Bullets"] = 10
+            module["ReloadTime"] = 0.000001
+            module["AutoFire"] = true
+        end
+    end)
+ 
+    -- PLAYER
+    local Player = Window:NewTab("Player")
+    local PlayerSection = Player:NewSection("Player")
+ 
+    PlayerSection:NewSlider("Walkspeed", "Changes the walkspeed", 250, 16, function(v)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+    end)
+ 
+    PlayerSection:NewSlider("Jumppower", "Changes the jumppower", 250, 50, function(v)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+    end)
+elseif game.PlaceId == 3956818381 then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Ninja Legends", "Sentinel")
+ 
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+ 
+    MainSection:NewToggle("Auto Swing", "Make your player autoswing", function(v)
+        getgenv().autoswing = v
+        while true do
+            if not getgenv().autoswing then return end
+            for _,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if v:FindFirstChild("ninjitsuGain") then
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                    break
+                end
+            end
+            local A_1 = "swingKatana"
+            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+            Event:FireServer(A_1)
+            wait(0.1)
+        end
+    end)
+ 
+    MainSection:NewToggle("Auto Sell", "Makes your player autosell", function(v)
+        getgenv().autosell = v
+        while true do
+            if getgenv().autoswing == false then return end
+            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            wait(0.1)
+            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = CFrame.new(0,0,0)
+            wait(0.1)
+        end
+    end)
+ 
+    MainSection:NewButton("Unlock all islands", "Unlocks all islands", function()
+        local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        for _,v in pairs(game:GetService("Workspace").islandUnlockParts:GetChildren()) do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            wait(0.1)
+        end
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
+    end)
+    
+    MainSection:NewToggle("Auto buy all swords", "Auto buys all swords", function(v)
+        getgenv().buyswords = v
+        while true do
+            if not getgenv().buyswords then return end
+            local A_1 = "buyAllSwords"
+            local A_2 = "Inner Peace Island"
+            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+            Event:FireServer(A_1, A_2)
+            wait(0.5)
+        end
+    end)
+ 
+    MainSection:NewToggle("Auto buy all belts", "Auto buys all belts", function(v)
+        getgenv().buybelts = v
+        while true do
+            if not getgenv().buybelts then return end
+            local A_1 = "buyAllBelts"
+            local A_2 = "Inner Peace Island"
+            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
+            Event:FireServer(A_1, A_2)
+            wait(0.5)
+        end
+    end)
+end
