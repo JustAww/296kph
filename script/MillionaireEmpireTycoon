@@ -3,7 +3,7 @@ local Window = Library.CreateLib("Millionaire Empire Tycoon", "BloodTheme")
 local Main = Window:NewTab("Main")
 local Player = Window:NewTab("Player")
 --local Section = Main:NewSection("Main")
-Section:NewSlider("WalkSpeed", "Aumenta la velocità di camminata", 500, 25, function(s) -- 500 (MaxValue) | 10 (MinValue)
+Section:NewSlider("WalkSpeed", "Aumenta la velocità di camminata", 500, 16, function(s) -- 500 (MaxValue) | 10 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 Section:NewSlider("JumpSpeed", "Aumenta il salto", 500, 25, function(s) -- 500 (MaxValue) | 10 (MinValue)
