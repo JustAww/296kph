@@ -2,4 +2,3 @@ if game.PlaceId == 3351674303 then -- Driving Empire
     loadstring(game:HttpGet('https://raw.githubusercontent.com/JustAww/296kph/main/script/DrivingEmpire'))()
 elseif game.PlaceId == 3956818381 then -- Ninja Legends
     loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/NinjaLegends"))()
-end
