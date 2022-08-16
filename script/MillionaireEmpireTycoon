@@ -1,8 +1,8 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Millionaire Empire Tycoon", "Synapse")
+local Window = Library.CreateLib("Millionaire Empire Tycoon", "Midnight")
 local Main = Window:NewTab("Main")
 local Player = Window:NewTab("Player")
 local Section = Main:NewSection("Main")
-Section:NewSlider("WalkSpeed", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+Section:NewSlider("WalkSpeed", "SliderInfo", 500, 10, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
