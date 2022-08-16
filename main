@@ -1,6 +1,7 @@
-if game.PlaceId == 3351674303 then -- Driving Empire
+if game.PlaceId == 3351674303 then --Driving Empire
     loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/DrivingEmpire"))()
-elseif game.PlaceId == 3956818381 then -- Ninja Legends
+elseif game.PlaceId == 3956818381 then --Ninja Legends
     loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/NinjaLegends"))()
 elseif game.PlaceId == 6677985923 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/NinjaLegends"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/MillionaireEmpireTycoon"))()
+end
