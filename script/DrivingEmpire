@@ -1,77 +1,71 @@
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Label = Instance.new("TextLabel")
-local UICorner = Instance.new("UICorner")
-local UIGradient = Instance.new("UIGradient")
-local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
-local TextButton_3 = Instance.new("TextButton")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Driving Empire", "BloodTheme")
+local function = loadstring(game:HttpGet("https://raw.githubusercontent.com")()
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.Position = UDim2.new(0.39810428, 0, 0.336384416, 0)
-Frame.Size = UDim2.new(0, 297, 0, 181)
-Frame.Selectable = true
-Frame.Active = true
-Frame.Draggable = true
-Label.Name = "Label"
-Label.Parent = Frame
-Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Label.BackgroundTransparency = 1.000
-Label.Position = UDim2.new(0.0101010101, 0, 0, 0)
-Label.Size = UDim2.new(0, 252, 0, 43)
-Label.Font = Enum.Font.SourceSansBold
-Label.Text = "Driving Empire"
-Label.TextColor3 = Color3.fromRGB(0, 0, 0)
-Label.TextScaled = true
-Label.TextSize = 14.000
-Label.TextWrapped = true
 
-UICorner.Parent = Frame
 
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 4)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-UIGradient.Parent = Frame
 
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.Position = UDim2.new(0.00696232356, 0, 0.254143655, 0)
-TextButton.Size = UDim2.new(0, 130, 0, 50)
-TextButton.Font = Enum.Font.SourceSansBold
-TextButton.Text = "Walk Speed"
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextScaled = true
-TextButton.TextSize = 14.000
-TextButton.TextWrapped = true
-TextButton.MouseButton1Click:Connect(function()
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 125
+
+-- Player
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+PlayerSection:NewSlider("WalkSpeed", "Aumenta la velocità di camminata", 500, 16, function(v) -- 500 (MaxValue) | 10 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+end)
+PlayerSection:NewSlider("JumpSpeed", "Aumenta il salto", 500, 50, function(j) -- 500 (MaxValue) | 10 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = j
 end)
 
-TextButton_2.Parent = Frame
-TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton_2.Position = UDim2.new(0.495177835, 0, 0.254143655, 0)
-TextButton_2.Size = UDim2.new(0, 133, 0, 50)
-TextButton_2.Font = Enum.Font.SourceSansBold
-TextButton_2.Text = "Log"
-TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_2.TextScaled = true
-TextButton_2.TextSize = 14.000
-TextButton_2.TextWrapped = true
-TextButton_2.MouseButton1Click:Connect(function()
-	print("Test")
+local Teleports = Window:NewTab("Teleports")
+local TeleportsSection = Teleports:NewSection("Teleports")
+TeleportsSection:NewButton("Paese Rasso", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-344.94043, 25.7902031, -950.690125, -0.981621504, -1.66571756e-09, -0.190838262, -5.4811129e-09, 1, 1.94649701e-08, 0.190838262, 2.01532391e-08, -0.981621504)
 end)
-TextButton_3.Parent = Frame
-TextButton_3.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-TextButton_3.Position = UDim2.new(0.848484874, 0, 0, 0)
-TextButton_3.Size = UDim2.new(0, 45, 0, 43)
-TextButton_3.Font = Enum.Font.SourceSans
-TextButton_3.Text = "X"
-TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_3.TextScaled = true
-TextButton_3.TextSize = 14.000
-TextButton_3.TextWrapped = true
-TextButton_3.MouseButton1Click:Connect(function()
-	TextButton_3.Parent.Visible = false
+TeleportsSection:NewButton("Drag Race", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-906.807922, 25.8003769, 36.2329865, 0.190845788, 3.23682912e-08, -0.981620014, 8.72592736e-08, 1, 4.99392385e-08, 0.981620014, -9.51861381e-08, 0.190845788)
 end)
+TeleportsSection:NewButton("Autostrada", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-51.8940697, 25.8013039, -196.193298, -0.190845728, 2.2310978e-08, 0.981620014, -6.01413674e-08, 1, -3.44213653e-08, -0.981620014, -6.56051427e-08, -0.190845728)
+end)
+TeleportsSection:NewButton("Circuito", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5504.66846, 14.9644508, -4759.43945, -0.808997512, 2.05854231e-08, 0.587812066, -1.89270075e-08, 1, -6.10693931e-08, -0.587812066, -6.05305104e-08, -0.808997512)
+end)
+TeleportsSection:NewButton("Test","", function()
+        game.Players.LocalPlayer.MaximumSimulationRadius = math.huge
+        game.Players.LocalPlayer.SimulationRadius = math.huge
+        
+        for i,v in pairs(Workspace:GetDescendants()) do
+        if v.ClassName == "Part" and v.Anchored == false and v:IsDescendantOf(game.Players.LocalPlayer.Character) == false then v.CFrame = CFrame.new(-5504.66846, 14.9644508, -4759.43945, -0.808997512, 2.05854231e-08, 0.587812066, -1.89270075e-08, 1, -6.10693931e-08, -0.587812066, -6.05305104e-08, -0.808997512)
+        end
+        end
+end)
+
+local Auto = Window:NewTab("Auto")
+local AutoSection = Auto:NewSection("Auto")
+AutoSection:NewButton("Taurus","",function()
+
+    local A_1 = "Spawn"
+    local A_2 = "Taurus"
+    local Event = game:GetService("ReplicatedStorage").Remotes.VehicleEvent
+    Event:FireServer(A_1, A_2)
+
+end)
+AutoSection:NewButton("TaurusCOP","",function()
+
+    local A_1 = "Spawn"
+    local A_2 = "C8"
+    local Event = game:GetService("ReplicatedStorage").Remotes.VehicleEvent
+    Event:FireServer(A_1, A_2)
+
+end)
+
+local Race = Window:NewTab("Race")
+local RaceSection = Race:NewSection("Race")
+RaceSection:NewButton("Auto Circuit", "ToggleInfo", function()
+    Checkpoint1()
+    wait(1)
+    Checkpoint2()
+    end)
+    
+
