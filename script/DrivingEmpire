@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Driving Empire", "BloodTheme")
-local function = loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/DrivingEmpireFunction/Function")()
+local checkpoint = loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAww/296kph/main/script/DrivingEmpireFunction/Function")()
 
 
 
@@ -62,10 +62,20 @@ end)
 
 local Race = Window:NewTab("Race")
 local RaceSection = Race:NewSection("Race")
-RaceSection:NewButton("Auto Circuit", "ToggleInfo", function()
+RaceSection:NewButton("Auto Drag", "ToggleInfo", function()
     Checkpoint1()
     wait(1)
     Checkpoint2()
+    end)
+    
+RaceSection:NewButton("Auto HighWay", "ToggleInfo", function()
+    Checkpoint1()
+    wait(1)
+    Checkpoint2()
+    end)
+    
+RaceSection:NewButton("Auto Circuit", "ToggleInfo", function()
+    checkpoint()
     end)
     
 
