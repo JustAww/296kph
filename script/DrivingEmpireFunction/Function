@@ -4,7 +4,7 @@ local function Checkpoint1()
 end
 end
 end
-wait(1)
+
 local function Checkpoint2()
     for i,v in pairs(Workspace:GetDescendants()) do
         if v.ClassName == "Part" and v.Anchored == false and v:IsDescendantOf(game.Players.LocalPlayer.Character) == false then v.CFrame = CFrame.new(-5774.67285, 13.9727173, -4613.88721, -0.784043193, 3.67414614e-08, 0.62070626, 3.44698625e-09, 1, -5.48389423e-08, -0.62070626, -4.08565342e-08, -0.784043193)
