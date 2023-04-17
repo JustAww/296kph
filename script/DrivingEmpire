@@ -1,6 +1,48 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "⚡Driving Empire", HidePremium = false})
 
+local Player = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 
+local Section = Tab:AddSection({
+	Name = "Section"
+})
+    Player:AddSlider({
+        Name = "WalkSpeed",
+        Min = 100,
+        Max = 250,
+        Default = 5,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "bananas",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+        end    
+    })
+
+
+    Player:AddSlider({
+        Name = "JumpSpeed",
+        Min = 100,
+        Max = 250,
+        Default = 0,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "bananas",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        end    
+    })
+    
+    Player:AddButton({
+        Name = "Anti-AFK",
+        Callback = function (Value)
+            loadstring(game:HttpGet(('https://raw.githubusercontent.com/RTrade/Voidz/main/AntiAFK.lua'),true))()
+        end
+    })
+    
 end
 OrionLib:Init()
