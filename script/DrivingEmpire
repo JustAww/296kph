@@ -44,5 +44,4 @@ local Section = Tab:AddSection({
         end
     })
     
-end
 OrionLib:Init()
