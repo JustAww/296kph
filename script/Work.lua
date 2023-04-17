@@ -49,7 +49,7 @@ while true do
             HundredHardDash.CFrame = Destination.CFrame * CFrame.new(0,0,0)
             
             if (PlayerCar.REAL.DRIFT.Position - Destination.Position).Magnitude >= 20 then
-                PlayerCar:PivotTo(HundredHardDash.CFrame * CFrame.new(0,6,0))
+                PlayerCar:PivotTo(HundredHardDash.CFrame * CFrame.new(0,0,0))
                 game.VirtualInputManager:SendKeyEvent(1, Enum.KeyCode.W, 0, game)
             end
             
