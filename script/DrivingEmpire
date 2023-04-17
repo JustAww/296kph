@@ -1,9 +1,30 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "⚡Driving Empire", HidePremium = false})
 
+local dealershipList = {}
+	for index, value in pairs(workspace:WaitForChild("Game"):WaitForChild("Dealerships"):WaitForChild("Dealerships"):GetChildren()) do
+		table.insert(dealershipList, value.Name)
+	end
+
+local flightEnabled = false
+local flightSpeed = 1
+
+
 local Player = Window:MakeTab({
 	Name = "Player",
 	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Teleport = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Vehicle = Window:MakeTab({
+	Name = "Vehicle",
+	Icon = "rbxassetid://8356815386",
 	PremiumOnly = false
 })
 
@@ -40,5 +61,64 @@ local Player = Window:MakeTab({
             loadstring(game:HttpGet(('https://raw.githubusercontent.com/RTrade/Voidz/main/AntiAFK.lua'),true))()
         end
     })
-    
+
+	Player:AddButton({
+	Name = "Destroy!",
+	Callback = function()
+      		OrionLib:Destroy()
+  	end    
+})
+
+	Teleport:AddDropdown({
+	Name = "Teleport",
+	Default = "1",
+	Options = dealershipList,
+	Callback = function(Value)
+		game:GetService("ReplicatedStorage").Remotes.Location:FireServer("Enter", Value)
+	end
+})
+
+	local Section = Vehicle:AddSection({
+		Name = "Usage"
+	})
+
+
+	Vehicle:AddToggle({
+		Name = "Keybinds Active",
+		Default = false,
+		Callback = function(Value)
+			print(Value)
+		end    
+	})
+
+	local Section1 = Vehicle:AddSection({
+		Name = "Flight"
+	})
+
+	Vehicle:AddToggle({
+		Name = "Enabled",
+		Default = false,
+		Callback = function(Value)
+			flightEnabled = Value
+		end    
+	})
+
+	Vehicle:AddSlider({
+	Name = "Slider",
+	Min = 0,
+	Max = 100,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "bananas",
+	Callback = function(Value)
+		flightSpeed = Value
+	end    
+})
+
+
+
+
+
+
 OrionLib:Init()
