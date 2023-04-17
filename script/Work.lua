@@ -46,7 +46,7 @@ while true do
         if workspace.ParkingMarkers:FindFirstChild'destinationPart' then
             local Destination = workspace.ParkingMarkers.destinationPart;
             
-            HundredHardDash.CFrame = Destination.CFrame * CFrame.new(0,1,0)
+            HundredHardDash.CFrame = Destination.CFrame * CFrame.new(0,0,0)
             
             if (PlayerCar.REAL.DRIFT.Position - Destination.Position).Magnitude >= 20 then
                 PlayerCar:PivotTo(HundredHardDash.CFrame * CFrame.new(0,6,0))
