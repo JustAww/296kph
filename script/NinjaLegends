@@ -1,113 +1,675 @@
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-    local Window = Library.CreateLib("Prison Life", "Sentinel")
- 
-    -- MAIN
-    local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Main")
- 
-    MainSection:NewDropdown("Give Gun", "Gives the localplayer a gun", {"M9", "Remington 870", "AK-47"}, function(v)
-        local A_1 = game:GetService("Workspace")["Prison_ITEMS"].giver[v].ITEMPICKUP
-        local Event = game:GetService("Workspace").Remote.ItemHandler
-        Event:InvokeServer(A_1)
-    end)
- 
-    MainSection:NewDropdown("Gun Mod", "Makes the gun op", {"M9", "Remington 870", "AK-47"}, function(v)
-        local module = nil
-        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(v) then
-            module = require(game:GetService("Players").LocalPlayer.Backpack[v].GunStates)
-        elseif game:GetService("Players").LocalPlayer.Character:FindFirstChild(v) then
-            module = require(game:GetService("Players").LocalPlayer.Character[v].GunStates)
+if game.PlaceId == 3956818381 then
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+    local Window = OrionLib:MakeWindow({Name = "⚡Ninja Legends", HidePremium = false})
+
+    --Values
+    _G.autoSwing = true
+    _G.autoSell = true
+    _G.autoSword = true
+    _G.autoSwordFast = true
+    _G.autoBelt = true
+    _G.autoBeltFast = true
+    _G.autoSkill = true
+    _G.autoShuriken = true
+    _G.autoRank = true
+    _G.autoChi = true
+    _G.autoCoins = true
+
+    local ESPSettings = { PlayerESP = { Enabled = false, TracersOn = false, BoxesOn = false, NamesOn = false, DistanceOn = false, HealthOn = false, ToolOn = false, FaceCamOn = false, Distance = 2000 }, ScrapESP = { Enabled = false, Distance = 2000, LegendaryOnly = true, RareOnly = true, GoodOnly = true, BadOnly = true }, SafeESP = { Enabled = false, Distance = 2000, BigOnly = true, SmallOnly = true }, RegisterESP = { Enabled = false, Distance = 2000 }, ESPColor = Color3.fromRGB(255, 255, 255), ToolColor = Color3.fromRGB(255, 255, 255)};
+    local ESPFramework = loadstring(game:HttpGet("https://raw.githubusercontent.com/NougatBitz/Femware-Leak/main/ESP.lua", true))()
+
+
+
+    local islandtp = game:GetService("Workspace").islandUnlockParts:GetChildren()
+    local islandTable = {}
+
+    for i,v in pairs(islandtp) do
+        table.insert(islandTable, v.Name)
+    end
+    --Functions
+
+    function Teleport(TeleportPlayer)
+        local player = game.Players.LocalPlayer
+        player.Character.HumanoidRootPart.CFrame = TeleportPlayer
+    end
+
+
+
+    function autoSwing()
+        while _G.autoSwing == true do
+            game.Players.LocalPlayer.ninjaEvent:FireServer("swingKatana")
+            wait(.0001)
         end
-        if module ~= nil then
-            module["MaxAmmo"] = math.huge
-            module["CurrentAmmo"] = math.huge
-            module["StoredAmmo"] = math.huge
-            module["FireRate"] = 0.000001
-            module["Spread"] = 0
-            module["Range"] = math.huge
-            module["Bullets"] = 10
-            module["ReloadTime"] = 0.000001
-            module["AutoFire"] = true
+    end
+
+    function autoSell()
+        while _G.autoSell == true do
+            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            wait(.001)
+            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = CFrame.new(0,0,0)
+            wait(.001)
         end
-    end)
- 
-    -- PLAYER
-    local Player = Window:NewTab("Player")
-    local PlayerSection = Player:NewSection("Player")
- 
-    PlayerSection:NewSlider("Walkspeed", "Changes the walkspeed", 250, 16, function(v)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
-    end)
- 
-    PlayerSection:NewSlider("Jumppower", "Changes the jumppower", 250, 50, function(v)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
-    end)
-elseif game.PlaceId == 3956818381 then
-    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-    local Window = Library.CreateLib("Ninja Legends", "Sentinel")
- 
-    -- MAIN
-    local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Main")
- 
-    MainSection:NewToggle("Auto Swing", "Make your player autoswing", function(v)
-        getgenv().autoswing = v
-        while true do
-            if not getgenv().autoswing then return end
-            for _,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if v:FindFirstChild("ninjitsuGain") then
-                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-                    break
+    end
+
+    function autoSword()
+        while _G.autoSword == true do
+            local oh1 = "buyAllSwords"
+            local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island", "Golden Master Island", "Dragon Legend Island", "Cybernetic Legends Island", "Skystorm Ultraus Island", "Chaos Legends Island", "Soul Fusion Island", "Dark Elements Island", "Inner Peace Island", "Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+        end
+    end
+    end
+
+    function autoSwordFast()
+        while _G.autoSwordFast == true do
+            local oh1 = "buyAllSwords"
+            local oh2 = {"Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+        end
+    end
+    end
+
+
+    function autoBelt()
+        while _G.autoBelt == true do
+            local oh1 = "buyAllBelts"
+            local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island", "Golden Master Island", "Dragon Legend Island", "Cybernetic Legends Island", "Skystorm Ultraus Island", "Chaos Legends Island", "Soul Fusion Island", "Dark Elements Island", "Inner Peace Island", "Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+            end
+        end
+    end
+
+    function autoSwordBelt()
+        while _G.autoSwordBelt == true do
+            local oh1 = "buyAllBelts"
+            local oh2 = {"Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+        end
+    end
+    end
+
+
+    function autoSkill()
+        while _G.autoSkill == true do
+            local oh1 = "buyAllSkills"
+            local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island", "Golden Master Island", "Dragon Legend Island", "Cybernetic Legends Island", "Skystorm Ultraus Island", "Chaos Legends Island", "Soul Fusion Island", "Dark Elements Island", "Inner Peace Island", "Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+            end
+        end
+    end
+
+    function autoShuriken()
+        while _G.autoShuriken == true do
+            local oh1 = "buyAllShurikens"
+            local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island", "Golden Master Island", "Dragon Legend Island", "Cybernetic Legends Island", "Skystorm Ultraus Island", "Chaos Legends Island", "Soul Fusion Island", "Dark Elements Island", "Inner Peace Island", "Blazing Vortex Island"}
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+            wait(.0001)
+        end
+        end
+    end
+
+
+    function autoRank()
+        while _G.autoRank == true do
+            local oh1 = "buyRank"
+            local oh2 = game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i].Name)
+            wait(.0001)
+            end
+        end
+    end
+
+    function autoChi()
+        while _G.autoChi == true do
+            for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+                if v.Name == "Pink Chi Crate" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+            wait(.16)
                 end
             end
-            local A_1 = "swingKatana"
-            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
-            Event:FireServer(A_1)
-            wait(0.1)
+        end   
+    end
+
+
+    function autoCoins()
+        while _G.autoCoins == true do
+            for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+                if v.Name == "Green Coin" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+            wait(.16)
+                end
+            end
         end
-    end)
- 
-    MainSection:NewToggle("Auto Sell", "Makes your player autosell", function(v)
-        getgenv().autosell = v
-        while true do
-            if getgenv().autoswing == false then return end
-            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            wait(0.1)
-            game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = CFrame.new(0,0,0)
-            wait(0.1)
-        end
-    end)
- 
-    MainSection:NewButton("Unlock all islands", "Unlocks all islands", function()
-        local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-        for _,v in pairs(game:GetService("Workspace").islandUnlockParts:GetChildren()) do
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-            wait(0.1)
-        end
-        wait(0.1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
-    end)
+    end
+
+
+
+--Tabs
+    --Main
+    local Main = Window:MakeTab({
+        Name = "Main",
+        Icon = "rbxassetid://7733960981",
+        PremiumOnly = false
+    })
+    --Player
+    local Player = Window:MakeTab({
+        Name = "Player",
+        Icon = "rbxassetid://7743876054",
+        PremiumOnly = false
+    })
+
+    --BuyAll
+    local BuyAll = Window:MakeTab({
+        Name = "Buy All",
+        Icon = "rbxassetid://7734056747",
+        PremiumOnly = false
+    })
+
+    --Training
+    local Training = Window:MakeTab({
+        Name = "Training Areas",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    --Island
+    local Island = Window:MakeTab({
+        Name = "Island",
+        Icon = "rbxassetid://7733964808",
+        PremiumOnly = false
+    })
+
+
+    --Elements
+    local Elements = Window:MakeTab({
+        Name = "Elements",
+        Icon = "rbxassetid://7743875263",
+        PremiumOnly = false
+    })
+
+
+
+
+
+
+
+
+
+
+    --Main
+    Main:AddToggle({
+        Name = "Auto Swing",
+        Default = false,
+        Callback = function(Value)
+            _G.autoSwing = Value
+            autoSwing()
+        end    
+    })
+
+    Main:AddButton({
+        Name = "Sell x35",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(77.0466, 91242.5, 123.682)
+            wait(0.3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5013.095703125, 54.41859817504883, 1606.641845703125)
+          end    
+    })
+
+    Main:AddToggle({
+        Name = "Auto Sell",
+        Default = false,
+        Callback = function(Value)
+            _G.autoSell = Value
+            autoSell()
+        end    
+    })
+
+
+    Main:AddToggle({
+        Name = "Auto Chi",
+        Default = false,
+        Callback = function(Value)
+            _G.autoChi = Value
+            autoChi()
+        end    
+    })
+
     
-    MainSection:NewToggle("Auto buy all swords", "Auto buys all swords", function(v)
-        getgenv().buyswords = v
-        while true do
-            if not getgenv().buyswords then return end
-            local A_1 = "buyAllSwords"
-            local A_2 = "Inner Peace Island"
-            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
-            Event:FireServer(A_1, A_2)
-            wait(0.5)
+    Main:AddToggle({
+        Name = "Auto Coins",
+        Default = false,
+        Callback = function(Value)
+            _G.autoCoins = Value
+            autoCoins()
+        end    
+    })
+
+    Main:AddButton({
+        Name = "Collect All Chest",
+        Callback = function()
+            local A_1 = "Soul Fusion Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Chaos Legends Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Skystorm Masters Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Ultra Ninjitsu Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Golden Zen Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Wonder Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Light Karma Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Midnight Shadow Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3) 
+            local A_1 = "Ancient Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Thunder Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Sahara Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)   
+            local A_1 = "Eternal Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3) 
+            local A_1 = "Legends Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Mythical Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Magma Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Enchanted Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)
+            local A_1 = "Golden Chest"
+            local Event = game:GetService("ReplicatedStorage").rEvents.checkChestRemote
+            Event:InvokeServer(A_1)
+            wait(3)   
+            local A_1 = "groupRewards"
+            local Event = game:GetService("ReplicatedStorage").rEvents.groupRemote
+            Event:InvokeServer(A_1)
+        end    
+    })
+
+
+
+    Player:AddSlider({
+        Name = "WalkSpeed",
+        Min = 100,
+        Max = 250,
+        Default = 5,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "bananas",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+        end    
+    })
+
+
+    Player:AddSlider({
+        Name = "JumpSpeed",
+        Min = 100,
+        Max = 250,
+        Default = 0,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "bananas",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        end    
+    })
+
+    Player:AddButton({
+        Name = "Shop",
+        Callback = function (Value)
+            game:GetService("Workspace").shopAreaCircles["shopAreaCircle19"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            wait(.001)
+            game:GetService("Workspace").shopAreaCircles["shopAreaCircle19"].circleInner.CFrame = CFrame.new(0,0,0)
+            wait(.001)
         end
-    end)
- 
-    MainSection:NewToggle("Auto buy all belts", "Auto buys all belts", function(v)
-        getgenv().buybelts = v
-        while true do
-            if not getgenv().buybelts then return end
-            local A_1 = "buyAllBelts"
-            local A_2 = "Inner Peace Island"
-            local Event = game:GetService("Players").LocalPlayer.ninjaEvent
-            Event:FireServer(A_1, A_2)
-            wait(0.5)
+    })
+
+
+    Player:AddToggle({
+        Name = "Esp",
+        Default = false,
+        Callback = function (Value)
+            ESPSettings.PlayerESP.Enabled = Value
+
+            ESPFramework.Color = ESPSettings.ESPColor
+            ESPFramework.ToolColor = ESPSettings.ToolColor
+            ESPFramework.Tracers = ESPSettings.PlayerESP.TracersOn
+            ESPFramework.Names = ESPSettings.PlayerESP.NamesOn
+            ESPFramework.Health = ESPSettings.PlayerESP.HealthOn
+            ESPFramework.Distance = ESPSettings.PlayerESP.DistanceOn
+            ESPFramework.Tool = ESPSettings.PlayerESP.ToolOn
+            ESPFramework.Boxes = ESPSettings.PlayerESP.BoxesOn
+            ESPFramework.FaceCamera = ESPSettings.PlayerESP.FaceCamOn
+            ESPFramework:Toggle(ESPSettings.PlayerESP.Enabled)
+            ESPSettings.PlayerESP.BoxesOn = Value
+            ESPFramework.Boxes = ESPSettings.PlayerESP.BoxesOn
         end
-    end)
+    })
+
+    Player:AddButton({
+        Name = "Anti-AFK",
+        Callback = function (Value)
+            loadstring(game:HttpGet(('https://raw.githubusercontent.com/RTrade/Voidz/main/AntiAFK.lua'),true))()
+        end
+    })
+
+
+
+    --BuyAll
+    BuyAll:AddToggle({
+        Name = "Auto Sword",
+        Default = false,
+        Callback = function(Value)
+            _G.autoSword = Value
+            autoSword()
+        end    
+    })
+
+    BuyAll:AddToggle({
+        Name = "Auto Sword Fast",
+        Default = false,
+        Callback = function(Value)
+            _G.autoSwordFast = Value
+            autoSwordFast()
+        end    
+    })
+
+
+    BuyAll:AddToggle({
+        Name = "Auto Belt",
+        Default = false,
+        Callback = function(Value)
+                _G.autoBelt = Value
+                autoBelt()
+        end    
+    })
+
+
+    BuyAll:AddToggle({
+        Name = "Auto Belt Fast",
+        Default = false,
+        Callback = function(Value)
+            _G.autoSwordBelt = Value
+            autoSwordBelt()
+        end    
+    })
+
+
+
+    BuyAll:AddToggle({
+        Name = "Auto Skill",
+        Default = false,
+        Callback = function(Value)
+                _G.autoSkill = Value
+                autoSkill()
+        end    
+    })
+
+
+    BuyAll:AddToggle({
+        Name = "Auto Shuriken",
+        Default = false,
+        Callback = function(Value)
+                _G.autoShuriken = Value
+                autoShuriken()
+        end    
+    })
+
+
+    BuyAll:AddToggle({
+        Name = "Auto Rank",
+        Default = false,
+        Callback = function(Value)
+                _G.autoRank = Value
+                autoRank()
+        end    
+    })
+
+
+
+
+
+    --Training
+    Training:AddButton({
+        Name = "x125 (Good)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5013.095703125, 54.41859817504883, 1606.641845703125)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Mystical Waters (Good)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(347.74881, 8824.53809, 114.271019)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Sword of Legends (Good)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1834.15967, 38.704483, -141.375641)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Elemental Tornado (Good)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(299.758484, 30383.0957, -90.1542206)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Lava Pit (Bad)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-116.631485, 12952.5381, 271.14624)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Tornado (Bad)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(325.641174, 16872.0938, -9.9906435)
+        end    
+    })
+
+    Training:AddButton({
+        Name = "Swords Of Ancients (Bad)",
+        Default = false,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(648.365662, 38.704483, 2409.72266)
+        end    
+    })
+
+
+
+    --Island
+    Island:AddButton({
+        Name = "Unlock All",
+        Default = false,
+        Callback = function(Value)
+            for _,v in pairs(game:GetService("Workspace").islandUnlockParts:GetDescendants()) do
+                if v:IsA("TouchTransmitter") then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+                wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+                end
+                end        
+        end    
+    })
+
+    Island:AddDropdown({
+        Name = "Island List",
+        Default = "1",
+        Options = islandTable,
+        Callback = function(Value)
+            local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+            for i,v in pairs(islandtp) do
+                if v.Name == Value then
+                    for i,v in pairs(v:GetChildren()) do
+                        if v:IsA("Part") and game.Workspace.islandUnlockParts[Value].islandSignPart.CFrame then
+                            hrp.CFrame = v.CFrame
+                        end
+                    end
+                end
+            end
+        end
+    })
+
+    --Elements
+    Elements:AddButton({
+        Name = "Get All Elements",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Inferno","Lightning","Frost","Shadow Charge","Masterful Wrath","Electral Chaos","Shadowfire","Eternity Storm","Blazing Entity"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Inferno Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Inferno"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Lightning Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Lightning"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Frost Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Frost"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Shadow Charge Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Shadow Charge"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Masterful Wrath Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Masterful Wrath"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Electral Chaos Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Electral Chaos"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Shadowfire Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Shadowfire"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Eternity Storm Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Eternity Storm"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+    Elements:AddButton({
+        Name = "Blazing Entity Element",
+        Default = false,
+        Callback = function(Value)
+            local Elements = {"Blazing Entity"}         
+            for i,v in pairs(Elements) do game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer(v)         
+            end  
+        end
+    })
+
+
+end
+OrionLib:Init()
