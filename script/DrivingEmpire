@@ -7,9 +7,6 @@ local Player = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local Section = Tab:AddSection({
-	Name = "Section"
-})
     Player:AddSlider({
         Name = "WalkSpeed",
         Min = 100,
