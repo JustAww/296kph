@@ -6,8 +6,6 @@ HundredHardDash.Size     = Vector3.new(500000, 4, 500000)
 HundredHardDash.Anchored = true
 HundredHardDash.Transparency = 1
 
-getgenv().RatingTarget  = 2;
-getgenv().HighestRatingTarget = 2.1; 
 
 local YourCar = function()
     local Car = nil;
