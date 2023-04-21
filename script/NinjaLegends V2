@@ -1,0 +1,275 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Ninja Legends",
+    LoadingTitle = "296kph",
+    LoadingSubtitle = "by JustAww",
+})
+
+--Values
+_G.autoSwing = true
+_G.autoSell = true
+_G.autoSword = true
+_G.autoBelt = true
+_G.autoRank = true
+
+function autoSwing()
+    while _G.autoSwing == true do
+        game.Players.LocalPlayer.ninjaEvent:FireServer("swingKatana")
+        wait(.0001)
+    end
+end
+
+function autoSell()
+    while _G.autoSell == true do
+        game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        wait(.001)
+        game:GetService("Workspace").sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = CFrame.new(0,0,0)
+        wait(.001)
+    end
+end
+
+function autoSword()
+    while _G.autoSword == true do
+        local oh1 = "buyAllSwords"
+        local oh2 = {"Blazing Vortex Island"}
+        for i = 1,#oh2 do
+        game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+        wait(.0001)
+    end
+end
+end
+
+function autoBelt()
+    while _G.autoBelt == true do
+        local oh1 = "buyAllBelts"
+        local oh2 = {"Blazing Vortex Island"}
+        for i = 1,#oh2 do
+        game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+        wait(.0001)
+    end
+end
+end
+
+function autoRank()
+    while _G.autoRank == true do
+        local oh1 = "buyRank"
+        local oh2 = game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()
+        for i = 1,#oh2 do
+        game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i].Name)
+        wait(.0001)
+        end
+    end
+end
+
+
+
+
+
+local Main = Window:CreateTab("Main")
+
+local Player = Window:CreateTab("Player")
+
+local Buy = Window:CreateTab("Buy")
+
+local Extra = Window:CreateTab("Extra", 7743875263)
+
+
+
+
+
+
+
+
+
+
+
+--MAIN --------------------------------
+
+local Toggle = Main:CreateToggle({
+    Name = "Auto Swing",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        _G.autoSwing = Value
+        autoSwing()
+    end,
+})
+
+local Toggle = Main:CreateToggle({
+    Name = "Auto Sell",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        _G.autoSell = Value
+        autoSell()
+    end,
+})
+
+
+--PLAYER --------------------------------
+
+local Slider = Player:CreateSlider({
+    Name = "WalkSpeed",
+    Range = {0, 100},
+    Increment = 10,
+    Suffix = "Bananas",
+    CurrentValue = 16,
+    Flag = "Slider1",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end,
+})
+
+local Slider = Player:CreateSlider({
+    Name = "JumpPower",
+    Range = {0, 100},
+    Increment = 10,
+    Suffix = "Bananas",
+    CurrentValue = 50,
+    Flag = "Slider1",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    end,
+})
+
+
+
+
+--BUY -----------------------------------
+
+local Toggle = Buy:CreateToggle({
+    Name = "Auto Sword",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        _G.autoSword = Value
+        autoSword()
+    end,
+})
+
+local Toggle = Buy:CreateToggle({
+    Name = "Auto Belt",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        _G.autoBelt = Value
+        autoBelt()
+    end,
+})
+
+local Toggle = Buy:CreateToggle({
+    Name = "Auto Rank",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        _G.autoRank = Value
+        autoRank()
+    end,
+})
+
+
+
+
+--EXTRA ---------------------------------
+
+local Button = Extra:CreateButton({
+    Name = "Destroy!",
+    Callback = function()
+        Rayfield:Destroy()
+    end,
+})
+
+local Button = Extra:CreateButton({
+    Name = "Anti-Lag",
+    Callback = function()
+        local ToDisable = {
+            Textures = true,
+            VisualEffects = true,
+            Parts = true,
+            Particles = true,
+            Sky = true
+        }
+        
+        local ToEnable = {
+            FullBright = false
+        }
+        
+        local Stuff = {}
+        
+        for _, v in next, game:GetDescendants() do
+            if ToDisable.Parts then
+                if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
+                    v.Material = Enum.Material.SmoothPlastic
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Particles then
+                if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
+                    v.Enabled = false
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.VisualEffects then
+                if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
+                    v.Enabled = false
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Textures then
+                if v:IsA("Decal") or v:IsA("Texture") then
+                    v.Texture = ""
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Sky then
+                if v:IsA("Sky") then
+                    v.Parent = nil
+                    table.insert(Stuff, 1, v)
+                end
+            end
+        end
+        
+        game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "..#Stuff.." assets / effects. Settings :")
+        
+        for i, v in next, ToDisable do
+            print(tostring(i)..": "..tostring(v))
+        end
+        
+        if ToEnable.FullBright then
+            local Lighting = game:GetService("Lighting")
+            
+            Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+            Lighting.FogEnd = math.huge
+            Lighting.FogStart = math.huge
+            Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+            Lighting.Brightness = 5
+            Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
+            Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
+            Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+            Lighting.Outlines = true
+        end
+    end,
+})
+
+local Button = Extra:CreateButton({
+    Name = "Anti-AFK",
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/RTrade/Voidz/main/AntiAFK.lua'),true))()
+    end,
+})
+
+
+
+
+
+
+
+
+
+
+Rayfield:LoadConfiguration()
