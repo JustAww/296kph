@@ -23,6 +23,9 @@ if game.PlaceId == 3956818381 then
     local islandtp = game:GetService("Workspace").islandUnlockParts:GetChildren()
     local islandTable = {}
 
+    local Trainingtp = game:GetService("Workspace").trainingAreaParts:GetChildren()
+    local TrainingTable = {}
+
     for i,v in pairs(islandtp) do
         table.insert(islandTable, v.Name)
     end
@@ -148,7 +151,7 @@ if game.PlaceId == 3956818381 then
             for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
                 if v.Name == "Green Coin" then 
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
-            wait(.16)
+                wait(.16)
                 end
             end
         end
@@ -195,6 +198,12 @@ if game.PlaceId == 3956818381 then
     --Elements
     local Elements = Window:MakeTab({
         Name = "Elements",
+        Icon = "rbxassetid://7743875263",
+        PremiumOnly = false
+    })
+
+    local Extra = Window:MakeTab({
+        Name = "Extra",
         Icon = "rbxassetid://7743875263",
         PremiumOnly = false
     })
@@ -255,6 +264,8 @@ if game.PlaceId == 3956818381 then
             autoCoins()
         end    
     })
+
+
 
     Main:AddButton({
         Name = "Collect All Chest",
@@ -368,6 +379,25 @@ if game.PlaceId == 3956818381 then
             game:GetService("Workspace").shopAreaCircles["shopAreaCircle19"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
             wait(.001)
             game:GetService("Workspace").shopAreaCircles["shopAreaCircle19"].circleInner.CFrame = CFrame.new(0,0,0)
+            wait(.001)
+        end
+    })
+
+    Player:AddButton({
+       Name = "Cloning",
+       Callback = function()
+           game:GetService("Workspace").cloningAreaCircle.circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            wait(.001)
+           game:GetService("Workspace").cloningAreaCircle.circleInner.CFrame = CFrame.new(0,0,0)
+          end    
+    })
+
+    Player:AddButton({
+        Name = "Skill",
+        Callback = function (Value)
+            game:GetService("Workspace").skillAreaCircles["skillsAreaCircle19"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            wait(.001)
+            game:GetService("Workspace").skillAreaCircles["skillsAreaCircle19"].circleInner.CFrame = CFrame.new(0,0,0)
             wait(.001)
         end
     })
@@ -669,6 +699,111 @@ if game.PlaceId == 3956818381 then
             end  
         end
     })
+
+    Extra:AddButton({
+        Name = "Anti-Lag",
+        Default = false,
+        Callback = function(Value)
+            local ToDisable = {
+                Textures = true,
+                VisualEffects = true,
+                Parts = true,
+                Particles = true,
+                Sky = true
+            }
+            
+            local ToEnable = {
+                FullBright = false
+            }
+            
+            local Stuff = {}
+            
+            for _, v in next, game:GetDescendants() do
+                if ToDisable.Parts then
+                    if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
+                        v.Material = Enum.Material.SmoothPlastic
+                        table.insert(Stuff, 1, v)
+                    end
+                end
+                
+                if ToDisable.Particles then
+                    if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
+                        v.Enabled = false
+                        table.insert(Stuff, 1, v)
+                    end
+                end
+                
+                if ToDisable.VisualEffects then
+                    if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
+                        v.Enabled = false
+                        table.insert(Stuff, 1, v)
+                    end
+                end
+                
+                if ToDisable.Textures then
+                    if v:IsA("Decal") or v:IsA("Texture") then
+                        v.Texture = ""
+                        table.insert(Stuff, 1, v)
+                    end
+                end
+                
+                if ToDisable.Sky then
+                    if v:IsA("Sky") then
+                        v.Parent = nil
+                        table.insert(Stuff, 1, v)
+                    end
+                end
+            end
+            
+            game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "..#Stuff.." assets / effects. Settings :")
+            
+            for i, v in next, ToDisable do
+                print(tostring(i)..": "..tostring(v))
+            end
+            
+            if ToEnable.FullBright then
+                local Lighting = game:GetService("Lighting")
+                
+                Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+                Lighting.FogEnd = math.huge
+                Lighting.FogStart = math.huge
+                Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+                Lighting.Brightness = 5
+                Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
+                Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
+                Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+                Lighting.Outlines = true
+            end
+        end
+    })
+
+    Extra:AddButton({
+        Name = "Destroy!",
+        Default = false,
+        Callback = function(Value)
+            OrionLib:Destroy()
+        end
+    })
+
+    Extra:AddDropdown({
+        Name = "Training List",
+        Default = "1",
+        Options = TrainingTable,
+        Callback = function(Value)
+            local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+            for i,v in pairs(Trainingtp) do
+                if v.Name == Value then
+                    for i,v in pairs(v:GetChildren()) do
+                        if v:IsA("Part") and game.Workspace.trainingAreaParts[Value].beamAttachment0.WorldCFrame then
+                            hrp.WorldCFrame = v.WorldCFrame
+                        end
+                    end
+                end
+            end
+        end
+    })
+
+
 
 
 end
